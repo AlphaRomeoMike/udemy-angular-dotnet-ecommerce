@@ -38,5 +38,17 @@ namespace API.Controllers
         _logger.LogInformation($"Getting info for {id}");
         return await _repo.GetProductByIdAsync(id);
       }
+
+      [HttpGet("brands")]
+      public async Task<ActionResult<List<ProductBrand>>> GetProductBrand()
+      {
+         return await _repo.GetProductBrandsAsync();
+      }
+
+      [HttpGet("types")]
+      public async Task<ActionResult<List<ProductType>>> GetProductTypes()
+      {
+         return await _repo.GetProductTypeAsync();
+      }
    }
 }
