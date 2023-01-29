@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 
 namespace Core.Specifications
 {
-   public class BaseSpecification<T> : ISpecification<T>
-   {
-      public BaseSpecification(Expression<Func<T, bool>> criteria)
-      {
-         Criteria = criteria;
-      }
+#nullable disable
+    public class BaseSpecification<TEntity> : ISpecification<TEntity>
+    {
+        public Expression<Func<TEntity, bool>> Criteria { get; }
+        public BaseSpecification()
+        {
+        }
 
-      public Expression<Func<T, bool>> Criteria { get; }
-      public List<Expression<Func<T, object>>> Includes { get => new List<Expression<Func<T, object>>>(); }
+        public BaseSpecification(Expression<Func<TEntity, bool>> criteria)
+        {
+            Criteria = criteria;
+        }
 
-      protected void AddInclude(Expression<Func<T, object>> includeExpression)
-      {
-         Includes.Add(includeExpression);
-      }
-   }
+        public List<Expression<Func<TEntity, object>>> Includes { get; } = new List<Expression<Func<TEntity, object>>>();
+
+        protected void AddInclude(Expression<Func<TEntity, object>> includeExpression)
+        {
+            Includes.Add(includeExpression);
+        }
+    }
 }
