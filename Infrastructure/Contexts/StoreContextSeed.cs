@@ -12,7 +12,7 @@ namespace Infrastructure.Contexts
             try {
                 if (!context.ProductBrand.Any())
                 {
-                    var brandsData = File.ReadAllText("./Infrastructure/Data/brands.json");
+                    var brandsData = File.ReadAllText("../Infrastructure/Contexts/Data/brands.json");
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
                     foreach (var item in brands!)
                     {
@@ -22,7 +22,7 @@ namespace Infrastructure.Contexts
                 }
                 if (!context.ProductType.Any())
                 {
-                    var typesData = File.ReadAllText("./Infrastructure/Data/types.json");
+                    var typesData = File.ReadAllText("../Infrastructure/Contexts/Data/types.json");
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
                     foreach (var item in types!)
                     {
@@ -32,7 +32,7 @@ namespace Infrastructure.Contexts
                 }
                 if (!context.Products.Any())
                 {
-                    var productsData = File.ReadAllText("./Infrastructure/Data/products.json");
+                    var productsData = File.ReadAllText("../Infrastructure/Contexts/Data/products.json");
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
                     foreach (var item in products)
                     {
