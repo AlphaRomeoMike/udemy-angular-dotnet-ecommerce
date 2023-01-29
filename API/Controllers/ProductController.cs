@@ -8,6 +8,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Core.Interfaces;
 
 namespace API.Controllers
 {
@@ -16,28 +17,26 @@ namespace API.Controllers
    public class ProductController : ControllerBase
    {
       private readonly ILogger<ProductController> _logger;
-      private readonly StoreContext context;
+      private readonly IProductRepository _repo;
 
-      public ProductController(ILogger<ProductController> logger, 
-      StoreContext context)
+      public ProductController(ILogger<ProductController> logger, IProductRepository repo)
       {
          _logger = logger;
-         this.context = context;
+         _repo = repo;
       }
 
       [HttpGet]
       public async Task<ActionResult<List<Product>>> Products()
       {
          _logger.LogInformation("Listing all data");
-         var products = await context.Products.ToListAsync();
-         return products;
+         return await _repo.GetProducts();
       }
 
       [HttpGet("{id}")]
       public async Task<ActionResult<Product?>> Product(int? id)
       {
-        _logger.LogInformation("Getting all data");
-        return await context.Products.FindAsync(id);
+        _logger.LogInformation($"Getting info for {id}");
+        return await _repo.GetProductByIdAsync(id);
       }
    }
 }
