@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Core.Interfaces;
+using Core.Specifications;
 
 namespace API.Controllers
 {
@@ -36,7 +37,8 @@ namespace API.Controllers
       public async Task<ActionResult<List<Product>>> Products()
       {
          _logger.LogInformation("Listing all data");
-         return await _productRepo.ListAllAsync();
+         var spec = new ProductWithTypeAndBrandSpecification();
+         return await _productRepo.ListAsync(spec);
       }
 
       [HttpGet("{id}")]
