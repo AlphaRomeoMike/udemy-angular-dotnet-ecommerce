@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts
 {
+   #nullable disable
    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
    {
       private readonly StoreContext _context;
