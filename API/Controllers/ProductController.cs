@@ -13,6 +13,7 @@ using Core.Specifications;
 using API.DTOs;
 using AutoMapper;
 using API.Errors;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -40,12 +41,15 @@ namespace API.Controllers
       }
 
       [HttpGet]
-      public async Task<ActionResult<List<ProductToReturnDto>>> Products(string sort)
+      public async Task<ActionResult<Pagination<ProductToReturnDto>>> Products([FromQuery] ProductSpecPrams productSpec)
       {
          _logger.LogInformation("Listing all data");
-         var spec = new ProductWithTypeAndBrandSpecification(sort);
+         var spec = new ProductWithTypeAndBrandSpecification(productSpec);
+         var countSpec = new ProductWithFiltersForCountSpecification(productSpec);
+         var totalItems = await _productRepo.CountAsync(countSpec);
          var products = await _productRepo.ListAsync(spec);
-         return _mapper.Map<List<Product>, List<ProductToReturnDto>>(products);
+         var data = _mapper.Map<List<Product>, List<ProductToReturnDto>>(products);
+         return new Pagination<ProductToReturnDto>(productSpec.PageIndex, productSpec.PageSize, totalItems, data);
       }
 
       [HttpGet("{id}")]

@@ -14,6 +14,7 @@ namespace Infrastructure.Contexts
          _context = context;
       }
 
+
       public async Task<T> GetByIdAsync(int? id)
       {
          return await _context.Set<T>().FindAsync(id);
@@ -37,6 +38,10 @@ namespace Infrastructure.Contexts
       private IQueryable<T> ApplySpecification(ISpecification<T> spec)
       {
          return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
+      }
+      public async Task<int> CountAsync(ISpecification<T> spec)
+      {
+         return await ApplySpecification(spec).CountAsync();
       }
    }
 }
