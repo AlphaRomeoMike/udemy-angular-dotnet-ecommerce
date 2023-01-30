@@ -15,9 +15,7 @@ using AutoMapper;
 
 namespace API.Controllers
 {
-   [ApiController]
-   [Route("api/[controller]")]
-   public class ProductController : ControllerBase
+   public class ProductController : BaseApiController
    {
       private readonly ILogger<ProductController> _logger;
       private readonly IGenericRepository<Product> _productRepo;
@@ -25,11 +23,13 @@ namespace API.Controllers
       private readonly IGenericRepository<ProductType> _productTypeRepo;
       private readonly IMapper _mapper;
 
-      public ProductController(ILogger<ProductController> logger,
-      IGenericRepository<Product> productRepo,
-      IGenericRepository<ProductBrand> productBrandRepo,
-      IGenericRepository<ProductType> prouctTypeRepo,
-      IMapper mapper)
+      public ProductController(
+         ILogger<ProductController> logger,
+         IGenericRepository<Product> productRepo,
+         IGenericRepository<ProductBrand> productBrandRepo,
+         IGenericRepository<ProductType> prouctTypeRepo,
+         IMapper mapper
+         )
       {
          _logger = logger;
          _productRepo = productRepo;
