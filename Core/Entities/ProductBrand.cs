@@ -5,6 +5,6 @@ namespace Core.Entities
    public class ProductBrand : BaseEntity
    {
       [MaxLength(100)]
-      public string? Name { get; set; }
+      public string Name { get; set; }
    }
 }

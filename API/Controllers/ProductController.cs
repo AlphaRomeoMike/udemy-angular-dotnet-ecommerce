@@ -40,10 +40,10 @@ namespace API.Controllers
       }
 
       [HttpGet]
-      public async Task<ActionResult<List<ProductToReturnDto>>> Products()
+      public async Task<ActionResult<List<ProductToReturnDto>>> Products(string sort)
       {
          _logger.LogInformation("Listing all data");
-         var spec = new ProductWithTypeAndBrandSpecification();
+         var spec = new ProductWithTypeAndBrandSpecification(sort);
          var products = await _productRepo.ListAsync(spec);
          return _mapper.Map<List<Product>, List<ProductToReturnDto>>(products);
       }
