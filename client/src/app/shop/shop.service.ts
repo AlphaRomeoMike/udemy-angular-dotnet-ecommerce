@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IBrand } from '../shared/interfaces/ibrand';
 import { IPagination } from '../shared/interfaces/ipagination';
+import { IProduct } from '../shared/interfaces/iproduct';
 import { IType } from '../shared/interfaces/itype';
 import { ShopParams } from '../shared/interfaces/ShopParams';
 
@@ -58,5 +59,9 @@ export class ShopService {
    */
   getTypes() {
     return this.http.get<IType[]>(this.url + 'product/types');
+  }
+
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.url + 'product/' + id);
   }
 }

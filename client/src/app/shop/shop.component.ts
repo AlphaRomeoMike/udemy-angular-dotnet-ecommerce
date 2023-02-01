@@ -18,9 +18,9 @@ export class ShopComponent implements OnInit {
   types: IType[];
   shopParams = new ShopParams();
   sortOption = [
-    {name: 'Alphabetical', value: 'name'},
-    {name: 'Price: Low to High', value: 'priceAsc'},
-    {name: 'Price: High to Low', value: 'priceDesc'},
+    { name: 'Alphabetical', value: 'name' },
+    { name: 'Price: Low to High', value: 'priceAsc' },
+    { name: 'Price: High to Low', value: 'priceDesc' },
   ];
   totalCount = 0;
   @ViewChild('search') searchTerm?: ElementRef;
@@ -46,7 +46,7 @@ export class ShopComponent implements OnInit {
 
   getBrands() {
     this.shopservice.getBrands().subscribe((response) => {
-      this.brands = [{ id: 0, name: 'All'},...response];
+      this.brands = [{ id: 0, name: 'All' }, ...response];
     }, (error) => {
       console.log(error);
     });
@@ -54,7 +54,7 @@ export class ShopComponent implements OnInit {
 
   getTypes() {
     this.shopservice.getTypes().subscribe((response) => {
-      this.types = [{ id: 0, name: 'All'},...response];
+      this.types = [{ id: 0, name: 'All' }, ...response];
     }, (error) => {
       console.log(error);
     });
@@ -67,7 +67,7 @@ export class ShopComponent implements OnInit {
   }
 
   onTypeSelected(typeId: number) {
-    this.shopParams.typeId= typeId;
+    this.shopParams.typeId = typeId;
     this.shopParams.pageNumber = 1
     this.getProducts();
   }

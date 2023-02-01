@@ -9,7 +9,7 @@
     <span class="mb-2">{{product.price | currency}}</span>
     <div class="btn-group mt-auto">
       <button type="button" class="btn btn-outline-dark fa fa-shopping-cart mr-2"></button>
-      <button type="button" class="btn btn-outline-dark fa fa-eye"></button>
+      <button type="button" routerLink="/shop/{{product.id}}" routerLinkActive="active" class="btn btn-outline-dark fa fa-eye"></button>
     </div>
   </div>
 </div>
