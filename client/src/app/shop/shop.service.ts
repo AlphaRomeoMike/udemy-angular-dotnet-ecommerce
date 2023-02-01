@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IBrand } from '../shared/interfaces/ibrand';
 import { IPagination } from '../shared/interfaces/ipagination';
 import { IType } from '../shared/interfaces/itype';
+import { ShopParams } from '../shared/interfaces/ShopParams';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +20,19 @@ export class ShopService {
    * @description This method gets all products
    * @returns Obserervable<IPagination>
    */
-  getProducts(brandId?: number, typeId?: number, sortOption? : string) {
+  getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
-    if (brandId) {
-      params = params.append('brandId', brandId.toString());
+    if (shopParams.brandId && shopParams.brandId != 0) {
+      params = params.append('brandId', shopParams.brandId.toString());
     }
-    if (typeId) {
-      params = params.append('typeId', typeId.toString());
+    if (shopParams.typeId && shopParams.typeId != 0) {
+      params = params.append('typeId', shopParams.typeId.toString());
     }
-    if (sortOption) {
-      params = params.append('sort', sortOption);
-    }
-    return this.http.get<IPagination>(this.url + 'product?pageSize=50', { observe: 'response', params })
+    params = params.append('sort', shopParams.sort);
+    params = params.append('pageIndex', shopParams.pageNumber.toString());
+    params = params.append('pageSize', shopParams.pageSize.toString());
+    if (shopParams.search) params = params.append('search', shopParams.search);
+    return this.http.get<IPagination>(this.url + 'product', { observe: 'response', params })
       .pipe(
         map(
           response => { return response.body }
