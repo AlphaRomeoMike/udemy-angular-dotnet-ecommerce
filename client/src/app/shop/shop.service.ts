@@ -29,8 +29,9 @@ export class ShopService {
       params = params.append('typeId', shopParams.typeId.toString());
     }
     params = params.append('sort', shopParams.sort);
-    params = params.append('pageIndex', shopParams.pageNumber.toString())
-    params = params.append('pageSize', shopParams.pageSize.toString())
+    params = params.append('pageIndex', shopParams.pageNumber.toString());
+    params = params.append('pageSize', shopParams.pageSize.toString());
+    if (shopParams.search) params = params.append('search', shopParams.search);
     return this.http.get<IPagination>(this.url + 'product', { observe: 'response', params })
       .pipe(
         map(
