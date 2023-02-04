@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({
   selector: 'app-order-totals',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class OrderTotalsComponent {
 
+
+  constructor(public basketService: BasketService) { }
 }

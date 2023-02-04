@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IBasketItem } from '../shared/interfaces/basket';
 import { BasketService } from './basket.service';
 
 @Component({
@@ -8,7 +9,13 @@ import { BasketService } from './basket.service';
 })
 export class BasketComponent {
 
-  constructor(public basketService: BasketService) {
+  constructor(public basketService: BasketService) { }
 
+  increment(item: IBasketItem) {
+    this.basketService.addItemToBasket(item);
+  }
+
+  remove(id: number) {
+    this.basketService.removeItemFromBasket(id);
   }
 }

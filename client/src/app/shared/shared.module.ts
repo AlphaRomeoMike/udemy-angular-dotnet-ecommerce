@@ -24,6 +24,7 @@ import { OrderTotalsComponent } from './order-totals/order-totals.component';
     PagingHeaderComponent,
     PagerComponent,
     CarouselModule,
+    OrderTotalsComponent,
   ]
 })
 export class SharedModule { }
