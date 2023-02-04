@@ -7,6 +7,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { SectionHeaderComponent } from './section-header/section-header.component';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 
@@ -22,9 +23,11 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
     CommonModule,
     RouterModule,
     HotToastModule.forRoot(),
+    BreadcrumbModule
   ],
   exports: [
     NavBarComponent,
+    SectionHeaderComponent,
   ]
 })
 export class CoreModule { }
