@@ -22,13 +22,7 @@ namespace API
       // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
       {
-         services.AddAutoMapper(typeof(MappingProfiles));
-         services.AddControllers();
-         services.AddDbContext<StoreContext>(x =>
-         {
-            x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
-         });
-         services.AddApplicationServices();
+         services.AddApplicationServices(_configuration);
          services.AddSwaggerDocumentation();
          services.AddCors(opt =>
          {

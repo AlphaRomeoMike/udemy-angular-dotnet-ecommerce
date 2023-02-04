@@ -20,9 +20,9 @@
        routerLinkActive="active">Error</a>
   </nav>
   <div class="d-flex align-item-center">
-    <a class="position-relative">
+    <a class="position-relative" routerLink="/basket">
       <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
-      <div class="cart-number">5</div>
+      <div class="cart-number" *ngIf="(basketService.basketSource$ | async) as basket">{{ getCount(basket.items) }}</div>
     </a>
     <a class="btn btn-outline-secondary mr-2">Login</a>
     <a class="btn btn-outline-secondary mr-3">Sign up</a>

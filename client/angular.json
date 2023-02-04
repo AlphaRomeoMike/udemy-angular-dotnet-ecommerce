@@ -45,6 +45,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": ["cuid"],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -52,7 +53,7 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "./node_modules/bootswatch/dist/lux/bootstrap.min.css",
+              "./node_modules/bootswatch/dist/united/bootstrap.min.css",
               "./node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/ngx-spinner/animations/timer.css",
               "src/styles.scss"

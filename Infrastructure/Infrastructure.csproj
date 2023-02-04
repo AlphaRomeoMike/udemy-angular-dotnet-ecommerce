@@ -12,5 +12,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.90" />
   </ItemGroup>
 </Project>

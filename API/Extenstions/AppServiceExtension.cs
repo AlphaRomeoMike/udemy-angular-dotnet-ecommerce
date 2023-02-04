@@ -1,19 +1,30 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Errors;
+using API.Helpers;
 using Core.Interfaces;
 using Infrastructure.Contexts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace API.Extenstions
 {
    public static class AppServiceExtension
    {
-      public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+      public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
       {
+         services.AddDbContext<StoreContext>(x =>
+         {
+            x.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+         });
+         services.AddSingleton<IConnectionMultiplexer>(c =>
+         {
+            var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis"));
+            return ConnectionMultiplexer.Connect(options);
+         });
+         services.AddAutoMapper(typeof(MappingProfiles));
+         services.AddControllers();
          services.AddScoped<IProductRepository, ProductRepository>();
+         services.AddScoped<IBasketRepository, BasketRepository>();
          services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
          services.Configure<ApiBehaviorOptions>(options =>
          {
