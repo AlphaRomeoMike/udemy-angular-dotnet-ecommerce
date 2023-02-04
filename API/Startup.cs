@@ -23,6 +23,7 @@ namespace API
       public void ConfigureServices(IServiceCollection services)
       {
          services.AddApplicationServices(_configuration);
+         services.AddIdentityServices(_configuration);
          services.AddSwaggerDocumentation();
          services.AddCors(opt =>
          {
@@ -49,6 +50,7 @@ namespace API
          app.UseRouting();
          app.UseStaticFiles();
          app.UseCors("CorsPolicy");
+         app.UseAuthentication();
          app.UseAuthorization();
 
          app.UseEndpoints(endpoints =>
