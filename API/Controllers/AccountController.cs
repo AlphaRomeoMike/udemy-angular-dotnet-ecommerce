@@ -51,6 +51,10 @@ namespace API.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto info)
         {
+            if (CheckEmailExistsAsync(info.Email).Result.Value)
+            {
+                return new BadRequestObjectResult(new ApiValidationResponse { Errors = new[] { "Email Address already in use" } });
+            }
             var user = new AppUser
             {
                 DisplayName = info.DisplayName,
@@ -98,6 +102,12 @@ namespace API.Controllers
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded) return Ok(_mapper.Map<Address, AddressDto>(user.Address));
             return BadRequest(new ApiResponse(400));
+        }
+
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
+        {
+            return await _userManager.FindByEmailAsync(email) != null;
         }
     }
 }
