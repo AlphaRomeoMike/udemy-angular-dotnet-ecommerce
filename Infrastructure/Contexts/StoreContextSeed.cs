@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Contexts
@@ -18,7 +19,6 @@ namespace Infrastructure.Contexts
                     {
                         context.ProductBrand.Add(item);
                     }
-                    await context.SaveChangesAsync();
                 }
                 if (!context.ProductType.Any())
                 {
@@ -28,7 +28,6 @@ namespace Infrastructure.Contexts
                     {
                         context.ProductType.Add(item);
                     }
-                    await context.SaveChangesAsync();
                 }
                 if (!context.Products.Any())
                 {
@@ -38,9 +37,18 @@ namespace Infrastructure.Contexts
                     {
                         context.Products.Add(item);
                     }
+                }
+                if (!context.DeliveryMethods.Any())
+                {
+                    var deliveryData = File.ReadAllText("../Infrastructure/Contexts/Data/delivery.json");
+                    var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryData);
+                    foreach (var item in methods)
+                    {
+                        context.DeliveryMethods.AddRange(item);
+                    }
                     await context.SaveChangesAsync();
                 }
-                
+
             } 
             catch (Exception ex)
             {
