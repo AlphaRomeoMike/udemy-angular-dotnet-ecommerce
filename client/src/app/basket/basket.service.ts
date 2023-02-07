@@ -122,7 +122,6 @@ export class BasketService {
     if (!basket) return;
     const shipping = 0;
     const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0)
-    console.log(subtotal);
     const total = subtotal + shipping;
     this.basketTotalSource.next({
       shipping, total, subtotal

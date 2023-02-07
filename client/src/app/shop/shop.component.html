@@ -2,7 +2,7 @@
   <div class="row" *ngIf="types != undefined && brands != undefined && types.length > 0 && brands.length > 0">
     <section class="col-3">
       <h5 class="text-danger ml-3">Sorting</h5>
-      <select class="custom-select mb-3"
+      <select class="form-select mb-3"
               (change)="onSortSelected($event.target.value)">
         <option *ngFor="let sort of sortOption"
                 [value]="sort.value">{{sort.name}}</option>
@@ -38,7 +38,7 @@
                            [pageNumber]="shopParams.pageNumber"></app-paging-header>
         <div class="form-inline mt-2">
           <input type="text"
-                 class="form-control-sm mr-2"
+                 class="form-control-sm me-2"
                  style="width: 300px;"
                  placeholder="Search"
                  #search

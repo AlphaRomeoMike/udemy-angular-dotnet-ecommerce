@@ -27,6 +27,9 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               this.toastr.error(`${ error.error.message } - ${ error.status }`, { theme: 'snackbar', position: 'top-right' });
             }
+            if (error.status === 401) {
+              this.toastr.error('Unauthorized', { theme: 'snackbar', position: 'top-right' })
+            }
             if (error.status === 404) {
               this.router.navigateByUrl('/not-found');
               this.toastr.error('Resource not found', { theme: 'snackbar', position: 'top-right' })
