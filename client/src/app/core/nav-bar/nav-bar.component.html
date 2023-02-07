@@ -33,7 +33,6 @@
          routerLink="/account/register">Sign up</a>
     </ng-container>
     <ng-container *ngIf="(accountService.currentUser$ | async) as user">
-      <!-- <p>Welcome {{user.username}}</p> -->
       <div class="dropdown ms-3 me-5"
            style="cursor: pointer;"
            dropdown

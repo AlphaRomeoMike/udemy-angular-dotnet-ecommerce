@@ -6,39 +6,24 @@
         <h1 class="mb-3">Login</h1>
       </div>
       <div class="form-floating mb-3">
-        <input type="email"
-               [class.is-active]="form.get('email')?.touched && form.get('email')?.invalid"
+        <app-text-input [label]="'Email'"
+                        [formControl]="form.controls['email']"></app-text-input>
+        <app-text-input [label]="'Password'"
+                        [formControl]="form.controls['password']"
+                        [type]="'password'"></app-text-input>
+        <!-- <input type="email"
+               [class.is-invalid]="form.get('email')?.touched && form.get('email')?.invalid"
                formControlName="email"
                class="form-control"
+               [class.is-valid]="form.get('email')?.touched && form.get('email')?.valid"
                id="email"
-               placeholder="name@example.com">
-        <label for="email">Email address</label>
-        <div class="invalid-feedback"
-             *ngIf="form.get('email')?.errors?.['required']">Please choose an email.</div>
-        <div class="invalid-feedback"
-             *ngIf="form.get('email')?.errors?.['email']">Invalid email.</div>
-      </div>
-      <div class="form-floating">
-        <input type="password"
-               formControlName="password"
-               class="form-control"
-               [class.is-active]="form.get('password')?.touched && form.get('password')?.invalid"
-               id="password"
-               placeholder="Password">
-        <label for="password">Password</label>
+               placeholder="name@example.com"> -->
       </div>
       <div class="d-grid mt-2">
         <button class="btn btn-lg btn-primary"
+                [disabled]="form.invalid"
                 type="submit">Sign In</button>
       </div>
     </form>
-  </div>
-  <!-- TODO: Remove this -->
-  <div class="col-4">
-    <p>Form Status: {{form.status}}</p>
-    <p>Form Email: {{form.get('email')?.status}}</p>
-    <p>Email touched: {{form.get('email')?.touched}}</p>
-    <p>Form Dirty: {{form.get('email')?.dirty}}</p>
-    <pre>{{form.value | json}}</pre>
   </div>
 </div>
