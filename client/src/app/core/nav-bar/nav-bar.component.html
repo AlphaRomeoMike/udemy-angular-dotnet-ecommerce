@@ -6,7 +6,7 @@
        style="max-height: 50px;"
        [routerLink]="['/']"
        routerLinkActive="active" />
-  <nav class="my-2 my-md-0 mr-md-3 text-uppercase"
+  <nav class="my-2 my-md-0 me-md-3 text-uppercase"
        style="font-size: larger;">
     <a class="p-2"
        [routerLink]="['/']"
@@ -20,11 +20,55 @@
        routerLinkActive="active">Error</a>
   </nav>
   <div class="d-flex align-item-center">
-    <a class="position-relative" routerLink="/basket">
-      <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
-      <div class="cart-number" *ngIf="(basketService.basketSource$ | async) as basket">{{ getCount(basket.items) }}</div>
+    <a class="position-relative"
+       routerLink="/basket">
+      <i class="fa fa-shopping-cart fa-2x me-5 text-dark"></i>
+      <div class="cart-number"
+           *ngIf="(basketService.basketSource$ | async) as basket">{{ getCount(basket.items) }}</div>
     </a>
-    <a class="btn btn-outline-secondary mr-2">Login</a>
-    <a class="btn btn-outline-secondary mr-3">Sign up</a>
+    <ng-container *ngIf="(accountService.currentUser$ |async) == null">
+      <a class="btn btn-outline-secondary me-2"
+         routerLink="/account/login">Login</a>
+      <a class="btn btn-outline-secondary me-3"
+         routerLink="/account/register">Sign up</a>
+    </ng-container>
+    <ng-container *ngIf="(accountService.currentUser$ | async) as user">
+      <!-- <p>Welcome {{user.username}}</p> -->
+      <div class="dropdown ms-3 me-5"
+           style="cursor: pointer;"
+           dropdown
+           aria-haspopup="true">
+        <a class="dropdown-toggle"
+           dropdownToggle>
+          <strong>Welcome {{user.username}}</strong>
+          <ul *dropdownMenu
+              class="dropdown-menu dropdown-menu-right">
+              <!-- Item 1 -->
+              <li class="py-1">
+              <a routerLink="/basket"
+                 class="dropdown-item">
+                <i class="fa fa-shopping-cart me-3"></i> View Basket
+              </a>
+            </li>
+            <!-- Item 2 -->
+            <li class="py-1">
+              <a routerLink="/orders"
+                 class="dropdown-item">
+                <i class="fa fa-history me-3"></i> View Orders
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <!-- Item 3 -->
+            <li class="py-1">
+              <a (click)="accountService.logout()"
+                 class="dropdown-item">
+                <i class="fa fa-sign-out me-3"></i> Sign Out
+              </a>
+            </li>
+          </ul>
+        </a>
+      </div>
+    </ng-container>
+
   </div>
 </div>
