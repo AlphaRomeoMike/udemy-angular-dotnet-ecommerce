@@ -6,7 +6,7 @@
         {
         }
 
-        public Order(IList<DeliveryMethod> orderItems, string buyerEmail, Address shippedTo, DeliveryMethod deliveryMethod, decimal subTotal)
+        public Order(IList<OrderItem> orderItems, string buyerEmail, Address shippedTo, DeliveryMethod deliveryMethod, decimal subTotal)
         {
             BuyerEmail = buyerEmail;
             ShippedToAddress = shippedTo;
@@ -19,7 +19,7 @@
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
         public Address ShippedToAddress { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
-        public IList<DeliveryMethod> OrderItems { get; set; }
+        public IList<OrderItem> OrderItems { get; set; }
         public decimal SubTotal { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         public string PaymentIntentId { get; set; }

@@ -1,5 +1,6 @@
 using API.Errors;
 using API.Helpers;
+using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Contexts;
 using Infrastructure.Services;
@@ -25,8 +26,10 @@ namespace API.Extenstions
          services.AddAutoMapper(typeof(MappingProfiles));
          services.AddControllers();
          services.AddScoped<IProductRepository, ProductRepository>();
+         services.AddScoped<IUnitOfWork, UnitOfWork>();
          services.AddScoped<IBasketRepository, BasketRepository>();
          services.AddScoped<ITokenService, TokenService>();
+         services.AddScoped<IOrderService, OrderService>();
          services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
          services.Configure<ApiBehaviorOptions>(options =>
          {
