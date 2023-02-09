@@ -20,6 +20,31 @@ namespace API.Controllers
       _mapper = mapper;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<List<OrderToReturnDto>>> GetOrdersForUser()
+    {
+      var email = HttpContext.User.RetrieveEmailFromPrinciple();
+
+      var orders = await _orderService.GetOrdersForUserAsync(email);
+      return Ok(_mapper.Map<IList<OrderToReturnDto>>(orders));
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
+    {
+      var email = HttpContext.User.RetrieveEmailFromPrinciple();
+
+      var order = await _orderService.GetOrderByIdAsync(id, email);
+      if (order == null) return NotFound(new ApiResponse(404));
+      return Ok(_mapper.Map<OrderToReturnDto>(order));
+    }
+
+    [HttpGet("DeliveryMethods")]
+    public async Task<ActionResult<List<DeliveryMethod>>> GetDeliveryMethods()
+    {
+      return Ok(await _orderService.GetDeliveryMethodsAsync());
+    }
+
     [HttpPost]
     public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
     {

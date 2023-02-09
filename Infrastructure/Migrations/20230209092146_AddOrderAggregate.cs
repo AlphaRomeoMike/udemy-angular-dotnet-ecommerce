@@ -6,28 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class OrderEntityAdded : Migration
+    public partial class AddOrderAggregate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "OrderItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemOrderedProductItemId = table.Column<int>(name: "ItemOrdered_ProductItemId", type: "int", nullable: true),
-                    ItemOrderedProductName = table.Column<string>(name: "ItemOrdered_ProductName", type: "nvarchar(max)", nullable: true),
-                    ItemOrderedPictureUrl = table.Column<string>(name: "ItemOrdered_PictureUrl", type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderItems", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "DeliveryMethods",
                 columns: table => new
@@ -37,8 +20,7 @@ namespace Infrastructure.Migrations
                     ShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeliveryTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,32 +56,44 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemOrderedProductItemId = table.Column<int>(name: "ItemOrdered_ProductItemId", type: "int", nullable: true),
+                    ItemOrderedProductName = table.Column<string>(name: "ItemOrdered_ProductName", type: "nvarchar(max)", nullable: true),
+                    ItemOrderedPictureUrl = table.Column<string>(name: "ItemOrdered_PictureUrl", type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_DeliveryMethods_OrderId",
-                table: "DeliveryMethods",
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_DeliveryMethodId",
                 table: "Orders",
                 column: "DeliveryMethodId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_DeliveryMethods_Orders_OrderId",
-                table: "DeliveryMethods",
-                column: "OrderId",
-                principalTable: "Orders",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_DeliveryMethods_Orders_OrderId",
-                table: "DeliveryMethods");
-
             migrationBuilder.DropTable(
                 name: "OrderItems");
 
