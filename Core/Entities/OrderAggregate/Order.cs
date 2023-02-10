@@ -6,13 +6,14 @@
         {
         }
 
-        public Order(IList<OrderItem> orderItems, string buyerEmail, Address shippedTo, DeliveryMethod deliveryMethod, decimal subTotal)
+        public Order(IList<OrderItem> orderItems, string buyerEmail, Address shippedTo, DeliveryMethod deliveryMethod, decimal subTotal, string paymentIntentId)
         {
             BuyerEmail = buyerEmail;
             ShippedToAddress = shippedTo;
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             SubTotal = subTotal;
+            paymentIntentId = PaymentIntentId;
         }
 
         public string BuyerEmail { get; set; }
