@@ -13,7 +13,7 @@
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             SubTotal = subTotal;
-            paymentIntentId = PaymentIntentId;
+            PaymentIntentId = paymentIntentId;
         }
 
         public string BuyerEmail { get; set; }

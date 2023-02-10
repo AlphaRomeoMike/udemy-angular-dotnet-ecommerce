@@ -92,7 +92,7 @@ export class CheckoutPaymentComponent implements OnInit {
   async submitOrder() {
     this.loading = true
     const basket = this.basketService.getCurrentBasketValue()
-    if (!basket) throw new Error('Cannot get basket'); 
+    if (!basket) throw new Error('Cannot get basket');
     try {
       const createdOrder = await this.createOrder(basket)
       const paymentResult = await this.confirmPaymentWithStripe(basket)
