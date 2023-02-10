@@ -20,7 +20,7 @@ namespace Infrastructure.Services
 
     public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, Address shippingAddress)
     {
-      var basket = await  _basketRepo.GetBasketAsync(basketId);
+      var basket = await _basketRepo.GetBasketAsync(basketId);
       var items = new List<OrderItem>();
       foreach (var item in basket.Items)
       {
@@ -31,11 +31,24 @@ namespace Infrastructure.Services
       }
       var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(deliveryMethodId);
       var Subtotal = items.Sum(item => item.Price * item.Quantity);
-      var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, Subtotal);
-      _unitOfWork.Repository<Order>().Add(order);
+      var spec = new OrderByPaymentIntentIdSpecification(basket.PaymentIntentId);
+      var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+      if (order != null)
+      {
+        order.ShippedToAddress = shippingAddress;
+        order.DeliveryMethod = deliveryMethod;
+        order.SubTotal = Subtotal;
+        _unitOfWork.Repository<Order>().Update(order);
+      }
+      else
+      {
+        order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, Subtotal, basket.PaymentIntentId);
+        _unitOfWork.Repository<Order>().Add(order);
+      }
       var result = await _unitOfWork.Complete();
       if (result <= 0) return null;
-      await _basketRepo.DeleteBasketAsync(basketId);
+      // TODO: Handle this later
+      // await _basketRepo.DeleteBasketAsync(basketId); 
       return order;
     }
 

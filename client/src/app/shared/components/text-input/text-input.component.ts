@@ -15,10 +15,7 @@ export class TextInputComponent implements ControlValueAccessor {
     controlDir.valueAccessor = this;
   }
 
-  writeValue(obj: any): void {
-    console.log(obj);
-
-  }
+  writeValue(obj: any): void { }
 
   get control(): FormControl {
     return this.controlDir.control as FormControl;
