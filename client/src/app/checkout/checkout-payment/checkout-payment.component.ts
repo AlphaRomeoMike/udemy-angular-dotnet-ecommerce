@@ -42,7 +42,7 @@ export class CheckoutPaymentComponent implements OnInit {
     private checkoutService: CheckoutService,
     private toastr: HotToastService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     loadStripe(
