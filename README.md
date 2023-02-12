@@ -14,3 +14,4 @@
 - Node version 16
 - Npm version 9
 - Docker with Docker Compose
+- Stripe CLI @ latest
