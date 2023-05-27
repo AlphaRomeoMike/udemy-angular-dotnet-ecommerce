@@ -16,7 +16,7 @@ namespace API.Extenstions
       {
          services.AddDbContext<StoreContext>(x =>
          {
-            x.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            x.UseMySql(config.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(config.GetConnectionString("DefaultConnection")));
          });
          services.AddSingleton<IConnectionMultiplexer>(c =>
          {

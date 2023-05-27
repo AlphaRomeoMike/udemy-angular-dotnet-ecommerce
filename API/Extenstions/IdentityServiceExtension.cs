@@ -14,7 +14,7 @@ namespace API.Extenstions
       {
          services.AddDbContext<AppIdentityDbContext>(options =>
          {
-            options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+            options.UseMySql(configuration.GetConnectionString("IdentityConnection"), ServerVersion.AutoDetect(configuration.GetConnectionString("IdentityConnection")));
          });
 
          services.AddIdentityCore<AppUser>(options =>
