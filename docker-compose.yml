@@ -1,23 +1,26 @@
+version: "3.9"
 services:
-
-  redis:
-    image: redis:latest
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - 6379:6379
-    command: [ "redis-server", "--appendonly", "yes" ]
-    volumes:
-      - redis-data:/data
-
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-      - HTTP_USER=root
-      - HTTP_PASSWORD=secret
-    ports:
-      - 8081:8081
+      - "5001:80"
     depends_on:
+      - web_db
       - redis
-
-volumes:
-  redis-data:
+  
+  web_db:
+    image: mysql:8
+    environment:
+      - MYSQL_USER=dbUser
+      - MYSQL_PASSWORD=dbUser
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - 3306:3306
+    command: --init-file db/app-db-init.sql
+    volumes:
+      - ./Database/appdata:/docker-entrypoint-initdb.d
+    restart: always 
+  redis:
+    image: redis
