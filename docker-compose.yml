@@ -1,5 +1,4 @@
 services:
-
   redis:
     image: redis:latest
     ports:
@@ -18,6 +17,19 @@ services:
       - 8081:8081
     depends_on:
       - redis
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    entrypoint:
+      sh -c "
+        echo 'CREATE DATABASE IF NOT EXISTS WebProject; CREATE DATABASE IF NOT EXISTS WebProjectIdentity;' > /docker-entrypoint-initdb.d/init.sql;
+        /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+    ports:
+      - 3306:3307
+    volumes:
+      - mysql-data:/var/lib/mysql
 
 volumes:
   redis-data:
+  mysql-data:

@@ -1,13 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure.Contexts;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Core.Interfaces;
 using Core.Specifications;
 using API.DTOs;
@@ -74,6 +66,7 @@ namespace API.Controllers
       [HttpGet("types")]
       public async Task<ActionResult<List<ProductType>>> GetProductTypes()
       {
+         
          return await _productTypeRepo.ListAllAsync();
       }
    }
