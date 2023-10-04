@@ -29,6 +29,7 @@ namespace API.Controllers
         [Route("ProductType")]
         public async Task ProductType([FromBody] ProductType productType)
         {
+            _logger.LogInformation(Guid.NewGuid().ToString(), productType);
             await _storeContext.ProductType.AddAsync(productType);
         }
 
@@ -39,6 +40,7 @@ namespace API.Controllers
         public async Task<ActionResult<ProductType>> Get(int id)
         {
             var res = await _productTypeRepo.GetByIdAsync(id);
+            _logger.LogInformation(Guid.NewGuid().ToString(), res);
             if (res == null) return NotFound(new ApiResponse(404));
             return res;
         }
@@ -51,6 +53,7 @@ namespace API.Controllers
         {
             if (await _storeContext.ProductType.FindAsync(productType.Id) is ProductType found)
                 found.Name = productType.Name;
+                _logger.LogInformation(Guid.NewGuid().ToString(), "Updating ProductType");
             await _storeContext.SaveChangesAsync();
         }
 
@@ -58,6 +61,7 @@ namespace API.Controllers
         [Route("ProductBrand")]
         public async Task ProductBrand([FromBody] ProductBrand productBrand)
         {
+            _logger.LogInformation(Guid.NewGuid().ToString(), productBrand);
             await _storeContext.ProductBrand.AddAsync(productBrand);
         }
 
@@ -68,6 +72,7 @@ namespace API.Controllers
         public async Task<ActionResult<ProductBrand>> GetBrand(int id)
         {
             var res = await _productBrandRepo.GetByIdAsync(id);
+            _logger.LogInformation(Guid.NewGuid().ToString(), res);
             if (res == null) return NotFound(new ApiResponse(404));
             return res;
         }
@@ -80,6 +85,7 @@ namespace API.Controllers
         {
             if (await _storeContext.ProductBrand.FindAsync(productBrand.Id) is ProductBrand found)
                 found.Name = productBrand.Name;
+                _logger.LogInformation(Guid.NewGuid().ToString(), "Updating ProductBrand");
             await _storeContext.SaveChangesAsync();
         }
     }
