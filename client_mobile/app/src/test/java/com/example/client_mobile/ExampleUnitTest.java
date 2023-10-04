@@ -1,4 +1,4 @@
-package com.example.finalyearproject;
+package com.example.client_mobile;
 
 import org.junit.Test;
 

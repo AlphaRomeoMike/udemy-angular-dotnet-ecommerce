@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FinalYearProject"
-include ':app'
+rootProject.name = "client_mobile"
+include(":app")
