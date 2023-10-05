@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">client_mobile</string>
+    <string name="app_name">Elastic Ecommerce</string>
+    <string name="placeholder_image">Placeholder Image</string>
 </resources>
