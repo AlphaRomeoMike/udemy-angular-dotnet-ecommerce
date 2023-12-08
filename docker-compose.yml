@@ -31,9 +31,11 @@ services:
       - mysql-data:/var/lib/mysql
   adminer:
     image: adminer
+    environment:
+      - ADMINER_DEFAULT_SERVER=mysql
     restart: always
     ports:
-      - 8081:8081
+      - 8080:8080
 
 volumes:
   redis-data:
