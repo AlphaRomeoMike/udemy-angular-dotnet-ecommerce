@@ -74,17 +74,17 @@ namespace Infrastructure.Migrations
                     BuyerEmail = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OrderDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ShippedToAddressFirstName = table.Column<string>(name: "ShippedToAddress_FirstName", type: "longtext", nullable: true)
+                    ShippedToAddressFirstName = table.Column<string>(name: "FirstName", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShippedToAddressLastName = table.Column<string>(name: "ShippedToAddress_LastName", type: "longtext", nullable: true)
+                    ShippedToAddressLastName = table.Column<string>(name: "LastName", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShippedToAddressStreet = table.Column<string>(name: "ShippedToAddress_Street", type: "longtext", nullable: true)
+                    ShippedToAddressStreet = table.Column<string>(name: "Street", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShippedToAddressCity = table.Column<string>(name: "ShippedToAddress_City", type: "longtext", nullable: true)
+                    ShippedToAddressCity = table.Column<string>(name: "City", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShippedToAddressState = table.Column<string>(name: "ShippedToAddress_State", type: "longtext", nullable: true)
+                    ShippedToAddressState = table.Column<string>(name: "State", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShippedToAddressZipCode = table.Column<string>(name: "ShippedToAddress_ZipCode", type: "longtext", nullable: true)
+                    ShippedToAddressZipCode = table.Column<string>(name: "ZipCode", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DeliveryMethodId = table.Column<int>(type: "int", nullable: true),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -144,10 +144,10 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemOrderedProductItemId = table.Column<int>(name: "ItemOrdered_ProductItemId", type: "int", nullable: true),
-                    ItemOrderedProductName = table.Column<string>(name: "ItemOrdered_ProductName", type: "longtext", nullable: true)
+                    ItemOrderedProductItemId = table.Column<int>(name: "ProductItemId", type: "int", nullable: true),
+                    ItemOrderedProductName = table.Column<string>(name: "ProductName", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ItemOrderedPictureUrl = table.Column<string>(name: "ItemOrdered_PictureUrl", type: "longtext", nullable: true)
+                    ItemOrderedPictureUrl = table.Column<string>(name: "PictureUrl", type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),

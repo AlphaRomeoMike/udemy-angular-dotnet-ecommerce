@@ -1,8 +1,11 @@
+using System.Diagnostics.SymbolStore;
 using API.Errors;
 using Core.Entities;
 using Core.Interfaces;
+using Humanizer;
 using Infrastructure.Contexts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -87,6 +90,25 @@ namespace API.Controllers
                 found.Name = productBrand.Name;
                 _logger.LogInformation(Guid.NewGuid().ToString(), "Updating ProductBrand");
             await _storeContext.SaveChangesAsync();
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [Route("Admin/Vendor/Create")]
+        public async Task CreateVendor([FromBody] Vendor vendor) 
+        {
+            var shop_vendors = _storeContext.Vendors.Where(p => p.ShopId == vendor.ShopId);
+            foreach (var v in shop_vendors)
+            {
+                if (vendor.IsOwner == true && v.IsOwner == true)
+                {
+                    return BadRequest(new ApiResponse(400, "An owner for this shop already exists"));
+                }
+            }
+            var new_vendor = _storeContext.Vendors.AddAsync(vendor);
+            new_vendor = await _storeContext.SaveChangesAsync();
+            return new ApiResponse(201);
         }
     }
 }
