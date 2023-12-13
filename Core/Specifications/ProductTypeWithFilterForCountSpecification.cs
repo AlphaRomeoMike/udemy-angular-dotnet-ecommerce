@@ -9,7 +9,5 @@ namespace Core.Specifications
             (string.IsNullOrEmpty(productSpec.Search) || x.Name.ToLower().Contains(productSpec.Search)))
       {
       }
-
-
    }
 }
