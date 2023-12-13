@@ -1,0 +1,34 @@
+[
+    {
+        "Name": "Owner for Shop Alpha",
+        "Description": "Owner - Shop Alpha",
+        "Identifier": "Owner Shop Alpha",
+        "Password": "",
+        "IsOwner": true,
+        "ShopId": 1
+    },
+    {
+        "Name": "Vendor for Shop Alpha",
+        "Description": "Vendor - Shop Alpha",
+        "Identifier": "Vendor Shop Alpha",
+        "Password": "",
+        "IsOwner": true,
+        "ShopId": 1
+    },
+    {
+        "Name": "Owner for Shop Bravo",
+        "Description": "Owner - Shop Bravo",
+        "Identifier": "Owner Shop Bravo",
+        "Password": "",
+        "IsOwner": true,
+        "ShopId": 2
+    },
+    {
+        "Name": "Vendor for Shop Bravo",
+        "Description": "Vendor - Shop Bravo",
+        "Identifier": "Vendor Shop Bravo",
+        "Password": "",
+        "IsOwner": true,
+        "ShopId": 2
+    }
+]

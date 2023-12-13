@@ -16,5 +16,6 @@ namespace Core.Entities
         public bool IsBanned { get; set; }
         public DateTime CreatedAt { get; set; }
         public virtual ICollection<Vendor> Vendors { get; set; }
+        public Product[] Products { get; set; }
     }
 }

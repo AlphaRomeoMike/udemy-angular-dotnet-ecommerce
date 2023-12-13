@@ -1,8 +1,8 @@
-using System.Diagnostics.SymbolStore;
+using API.DTOs;
 using API.Errors;
+using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
-using Humanizer;
 using Infrastructure.Contexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,17 +15,21 @@ namespace API.Controllers
         private readonly StoreContext _storeContext;
         private IGenericRepository<ProductType> _productTypeRepo;
         private IGenericRepository<ProductBrand> _productBrandRepo;
+        private readonly IMapper _mapper;
 
         public AdminController(ILogger<AdminController> logger,
             StoreContext context,
             IGenericRepository<ProductType> productTypeRepo,
-            IGenericRepository<ProductBrand> productBrandRepo
+            IGenericRepository<ProductBrand> productBrandRepo,
+            IMapper mapper
         )
         {
             _logger = logger;
             _storeContext = context;
             _productTypeRepo = productTypeRepo;
             _productBrandRepo = productBrandRepo;
+            _mapper = mapper;
+
         }
 
         [HttpPost]
@@ -142,5 +146,10 @@ namespace API.Controllers
             await _storeContext.SaveChangesAsync();
             return Ok(new ApiResponse(201, "Operation was sucessfully completed"));
         }
+
+        // public async Task<ActionResult> AddProduct([FromBody] Product product)
+        // {
+        //     return Ok();
+        // }
     }
 }

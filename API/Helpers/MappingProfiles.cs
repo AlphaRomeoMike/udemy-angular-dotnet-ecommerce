@@ -18,7 +18,7 @@ namespace API.Helpers
 
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();
-            CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();
+            CreateMap<AddressDto, Address>();
             CreateMap<Order, OrderToReturnDto>()
                 .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.ShortName))
                 .ForMember(d => d.ShippingPrice, o => o.MapFrom(s => s.DeliveryMethod.Price));
@@ -27,6 +27,8 @@ namespace API.Helpers
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
+            CreateMap<VendorDto, Vendor>();
+            CreateMap<ShopDto, Shop>();
         }
     }
 }

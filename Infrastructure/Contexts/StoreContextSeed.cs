@@ -11,6 +11,25 @@ namespace Infrastructure.Contexts
         public static async Task SeedAsync(StoreContext context, ILoggerFactory logger)
         {
             try {
+                if (!context.Shops.Any())
+                {
+                    var shopData = File.ReadAllText("../Infrastructure/Context/Data/shops.json");
+                    var data = JsonSerializer.Deserialize<List<Shop>>(shopData);
+                    foreach (var shop in data)
+                    {
+                        context.Shops.Add(shop);
+                    }
+
+                }
+                if (!context.Vendors.Any())
+                {
+                    var vendorData = File.ReadAllText("../Infrastructure/Context/Data/vendors.json");
+                    var data = JsonSerializer.Deserialize<List<Vendor>>(vendorData);
+                    foreach (var shop in data)
+                    {
+                        context.Vendors.Add(shop);
+                    }
+                }
                 if (!context.ProductBrand.Any())
                 {
                     var brandsData = File.ReadAllText("../Infrastructure/Contexts/Data/brands.json");

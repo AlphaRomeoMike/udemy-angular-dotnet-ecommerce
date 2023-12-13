@@ -1,6 +1,6 @@
 namespace API.DTOs
 {
-    class ShopDto
+    public class ShopDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

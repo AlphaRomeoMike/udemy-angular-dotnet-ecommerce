@@ -1,7 +1,6 @@
 using AutoMapper;
 using API.DTOs;
 using Core.Entities.OrderAggregate;
-using Microsoft.Extensions.Configuration;
 
 namespace API.Helpers
 {

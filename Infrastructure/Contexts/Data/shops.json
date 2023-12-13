@@ -1,0 +1,14 @@
+[
+    {
+        "Name": "Shop Alpha",
+        "Description": "Shop Alpha - Description",
+        "IsActive": true,
+        "IsBanned": false
+    },
+    {
+        "Name": "Shop Bravo",
+        "Description": "Shop Bravo - Description",
+        "IsActive": true,
+        "IsBanned": false
+    }
+]
