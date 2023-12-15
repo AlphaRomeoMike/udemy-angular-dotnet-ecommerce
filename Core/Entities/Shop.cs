@@ -1,10 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace Core.Entities
-
 {
     [Index(nameof(Shop.Identifier), IsUnique = true)]
     public class Shop : BaseEntity

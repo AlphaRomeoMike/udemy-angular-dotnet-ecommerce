@@ -18,5 +18,7 @@ namespace Core.Entities
         public Shop Shop { get; set; }
         public int VendorId { get; set; }
         public Vendor Vendor { get; set; }
+        public bool IsActive { get; set; } = true;
+        public bool IsBanned { get; set; } = false;
     }
 }

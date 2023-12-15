@@ -146,10 +146,5 @@ namespace API.Controllers
             await _storeContext.SaveChangesAsync();
             return Ok(new ApiResponse(201, "Operation was sucessfully completed"));
         }
-
-        // public async Task<ActionResult> AddProduct([FromBody] Product product)
-        // {
-        //     return Ok();
-        // }
     }
 }
