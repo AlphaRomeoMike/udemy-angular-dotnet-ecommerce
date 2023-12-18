@@ -118,29 +118,22 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-        [Route("Vendor/Create")]
-        public async Task<OkObjectResult> CreateVedor([FromBody] Vendor vendor)
+        [Route("Admin/Vendor/Create")]
+        public async Task<ActionResult> CreateVendor([FromBody] Vendor vendor) 
         {
-            if (vendor.Id > 0)
+            var shop_vendors = _storeContext.Vendors.Where(p => p.ShopId == vendor.ShopId);
+            foreach (var v in shop_vendors)
             {
-                var v = _storeContext.Vendors.Where(p => p.Id == vendor.Id).First();
-                if (v != null)
+                if (vendor.IsOwner == true && v.IsOwner == true)
                 {
-                    v.Name = vendor.Name;
-                    v.Description = vendor.Description;
-                    v.IsActive = vendor.IsActive;
-                    v.IsOwner = vendor.IsOwner;
-                    v.ShopId = vendor.ShopId;
+                    return BadRequest(new ApiResponse(400, "An owner for this shop already exists"));
                 }
             }
-            else
-            {
-                await _storeContext.Vendors.AddAsync(vendor);
-            }
+            var new_vendor = _storeContext.Vendors.AddAsync(vendor);
             await _storeContext.SaveChangesAsync();
-            return Ok(new ApiResponse(201, "Operation was sucessfully completed"));
+            return Ok(new ApiResponse(201));
         }
     }
 }
