@@ -26,7 +26,7 @@
       <div class="cart-number"
            *ngIf="(basketService.basketSource$ | async) as basket">{{ getCount(basket.items) }}</div>
     </a>
-    <ng-container *ngIf="(accountService.currentUser$ |async) == null">
+    <ng-container *ngIf="(accountService.currentUser$ |async) == null || (adminService.currentAdmin$ | async) == null">
       <a class="btn btn-outline-secondary me-2"
          routerLink="/account/login">Login</a>
       <a class="btn btn-outline-secondary me-3"
@@ -68,6 +68,8 @@
         </a>
       </div>
     </ng-container>
-
+    <ng-container *ngIf="(adminService.currentAdmin$ | async) as user">
+      
+    </ng-container>
   </div>
 </div>

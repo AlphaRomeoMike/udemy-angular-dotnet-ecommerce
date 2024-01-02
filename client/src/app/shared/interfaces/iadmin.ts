@@ -12,6 +12,6 @@ export interface IAdminDto {
 }
 
 export interface ILogin {
-    name: string;
-    email: string;
+    Email: string;
+    Password: string;
 }
