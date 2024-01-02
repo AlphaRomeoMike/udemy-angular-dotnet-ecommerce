@@ -1,0 +1,30 @@
+<div class="container d-flex justify-content-center mt-5">
+    <div class="col-3">
+      <form [formGroup]="form"
+            (ngSubmit)="onSubmit()">
+        <div class="text-center mb-4">
+          <h1 class="mb-3">Login</h1>
+        </div>
+        <div class="form-floating mb-3">
+          <app-text-input [label]="'Email'"
+                          [formControl]="form.controls['email']"></app-text-input>
+          <app-text-input [label]="'Password'"
+                          [formControl]="form.controls['password']"
+                          [type]="'password'"></app-text-input>
+          <!-- <input type="email"
+                 [class.is-invalid]="form.get('email')?.touched && form.get('email')?.invalid"
+                 formControlName="email"
+                 class="form-control"
+                 [class.is-valid]="form.get('email')?.touched && form.get('email')?.valid"
+                 id="email"
+                 placeholder="name@example.com"> -->
+        </div>
+        <div class="d-grid mt-2">
+          <button class="btn btn-lg btn-primary"
+                  [disabled]="form.invalid"
+                  type="submit">Sign In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
